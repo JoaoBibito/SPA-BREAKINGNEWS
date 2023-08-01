@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home.jsx";
 import {Search} from "./pages/Search/Search.jsx";
 import { GlobalStyled } from "./GlobalStyled.jsx";
 import ErrorPage from "./components/ErrorPage/ErrorPage.jsx";
+
 const router = createBrowserRouter([{
  path: "/",
  element: <Navbar />,
