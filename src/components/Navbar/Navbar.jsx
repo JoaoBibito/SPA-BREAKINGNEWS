@@ -1,6 +1,7 @@
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import logo from "../../assets/logo.png";
-import {Button, Nav, ImgLogo, InputSpace, ErrorSpan} from "./NavbarStyled.js";
+import {Nav, ImgLogo, InputSpace, ErrorSpan} from "./NavbarStyled.js";
+import {Button} from "../Button/Button.jsx";
 import {useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -54,7 +55,11 @@ export function Navbar() {
           <ImgLogo src={logo} alt='Logo do Breaking News' />
         </Link>
 
-        <Button onClick={goAuth}>Entrar</Button>
+        <Link to='/auth'>
+          <Button type='text' text='Entrar'>
+            Entrar
+          </Button>
+        </Link>
       </Nav>
       {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>}
       <Outlet />
