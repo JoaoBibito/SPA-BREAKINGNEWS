@@ -15,3 +15,9 @@ export function signup(data) {
 
   return response;
 }
+
+function generateUsername(name) {
+  const nameLowerCaseWithoutSpaces = name.replace(/\s/g, "").toLowerCase();
+  const randomNumber = Math.floor(Math.random * 1000);
+  return `${nameLowerCaseWithoutSpaces}-${randomNumber}`;
+}
