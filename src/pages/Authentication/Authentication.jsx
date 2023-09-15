@@ -6,9 +6,12 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {signupSchema} from "../../schemas/signupSchema";
 import {signinSchema} from "../../schemas/signinSchem";
 import {ErrorSpan} from "../../components/Navbar/NavbarStyled.js";
-import {signup} from "../../Services/userService";
+import {signin, signup} from "../../Services/userService";
+import Cookies from "js-cookie";
+import {useNavigate} from "react-router-dom";
 
 export function Authentication() {
+  const navigate = useNavigate();
   const {
     register: registerSignup,
     handleSubmit: handlerSubmitSignup,
@@ -20,14 +23,21 @@ export function Authentication() {
     formState: {errors: errorsSignin},
   } = useForm({resolver: zodResolver(signinSchema)});
 
-  function inHandleSubmit(data) {
-    console.log(data);
+  async function inHandleSubmit(data) {
+    try {
+      const response = await signin(data);
+      Cookies.set("token", response.data, {expires: 1});
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function upHandleSubmit(data) {
     try {
       const response = await signup(data);
-      console.log(response);
+      Cookies.set("token", response.data, {expires: 1});
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
